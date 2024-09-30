@@ -1,4 +1,4 @@
-package main.java.com.projeto.gerenciador_veiculos.models;
+package com.projeto.gerenciador_veiculos.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

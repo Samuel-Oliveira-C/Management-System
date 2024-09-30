@@ -1,6 +1,6 @@
-package main.java.com.projeto.gerenciador_veiculos.repositories;
+package com.projeto.gerenciador_veiculos.repositories;
 
-import main.java.com.projeto.gerenciador_veiculos.models.Veiculos;
+import com.projeto.gerenciador_veiculos.models.Veiculos;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
