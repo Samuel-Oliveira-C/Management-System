@@ -1,10 +1,11 @@
 package com.projeto.gerenciador_veiculos;
 
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;
 import com.projeto.gerenciador_veiculos.models.Empresa;
 import com.projeto.gerenciador_veiculos.repositories.EmpresaRepository;
-//import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,12 +27,15 @@ public class EmpresaRepositoryTest {
         empresaRepository.save(empresa);
 
         // Buscar a empresa recém-salva pelo ID
-        Empresa empresaEncontrada = empresaRepository.findById(empresa.getId()).orElse(null);
+        Empresa empresaEncontrada = empresaRepository.findById(empresa.getId())
+            .orElseThrow(() -> new RuntimeException("Empresa não encontrada"));;
 
         // Assegurar que a empresa foi encontrada e que os valores estão corretos
         assertThat(empresaEncontrada).isNotNull();
         assertThat(empresaEncontrada.getId()).isEqualTo("1");
         assertThat(empresaEncontrada.getNome()).isEqualTo("Empresa Teste");
         assertThat(empresaEncontrada.getSenha()).isEqualTo("12345678901234");
+        
     }
 }
+

@@ -1,7 +1,9 @@
 package com.projeto.gerenciador_veiculos.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
@@ -30,13 +32,12 @@ public class Veiculos {
     
     @Column(nullable = true)
     private Float valorMulta;
-    
     @ManyToOne
+    @JoinColumn(name = "empresa_id", foreignKey = @ForeignKey(name = "fk_empresa_veiculo"))
     private Empresa empresa;
     
     // Construtor padrão para o JPA
     public Veiculos() {}
-
     // Construtor com argumentos
     public Veiculos(String id, String marca, String nome, boolean manutencao, boolean multado, Float valorMulta, Empresa empresa) {
         this.id = id;
