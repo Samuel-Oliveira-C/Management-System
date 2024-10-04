@@ -11,10 +11,14 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/*** Esse Teste Foi feito Para Testar a Entidade Empresa e o Repositorio dela.
+ * @Funcionalidades Testadas:
+ * @1 Salvar
+ * @2 Deletar
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)    //depois colocar um banco em memoria para testes
 public class EmpresaRepositoryTest {
-
     @Autowired
     private EmpresaRepository empresaRepository;
 
@@ -37,5 +41,19 @@ public class EmpresaRepositoryTest {
         assertThat(empresaEncontrada.getSenha()).isEqualTo("12345678901234");
         
     }
-}
 
+    @Test 
+    public void deletarEmpresa(){
+        // Criar nova empresa
+        Empresa empresa = new Empresa("1", "Empresa Teste", "12345678901234");
+
+        // Salvar empresa no repositório
+        empresaRepository.save(empresa);
+
+        //Deletando a Empresa
+        empresaRepository.deleteById(empresa.getId());
+
+        assertThat(empresaRepository.findById(empresa.getId())).isEmpty();
+
+    }
+}
