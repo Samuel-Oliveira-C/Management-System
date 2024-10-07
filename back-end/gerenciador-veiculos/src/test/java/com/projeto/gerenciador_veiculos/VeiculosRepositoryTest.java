@@ -8,7 +8,11 @@ import com.projeto.gerenciador_veiculos.repositories.VeiculosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
+// mvn test -Dspring.profiles.active=test utilize esse comando para rodar com perfil de test do application-test.properties
 
 /*** Esse Teste Foi feito Para Testar a Entidade Veiculo e o Repositorio dela.
  * @Funcionalidades Testadas:
@@ -18,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) 
+@ActiveProfiles("test")
 public class VeiculosRepositoryTest{
     @Autowired
     private VeiculosRepository veiculosRepository;

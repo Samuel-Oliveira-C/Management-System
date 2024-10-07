@@ -9,7 +9,11 @@ import com.projeto.gerenciador_veiculos.repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
+// mvn test -Dspring.profiles.active=test utilize esse comando para rodar com perfil de test do application-test.properties
 
 /*** Esse Teste Foi feito Para Testar a Entidade Empresa e o Repositorio dela.
  * @Funcionalidades Testadas:
@@ -17,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @2 Deletar
  */
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)    //depois colocar um banco em memoria para testes
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  
+@ActiveProfiles("test")
 public class EmpresaRepositoryTest {
     @Autowired
     private EmpresaRepository empresaRepository;
@@ -44,7 +49,7 @@ public class EmpresaRepositoryTest {
 
     @Test 
     public void deletarEmpresa(){
-        // Criar nova empresa
+        // Criar empresa
         Empresa empresa = new Empresa("1", "Empresa Teste", "12345678901234");
 
         // Salvar empresa no repositório
@@ -55,5 +60,29 @@ public class EmpresaRepositoryTest {
 
         assertThat(empresaRepository.findById(empresa.getId())).isEmpty();
 
+    }
+
+    @Test
+    public void verificarEmpresaVerdadeiro(){
+        // Criar empresa
+        Empresa empresa = new Empresa("1", "Empresa Teste", "12345678901234");
+
+        // Salvar empresa no repositório
+        empresaRepository.save(empresa);
+
+        //verificação
+        boolean valorTrue = empresaRepository.existsByNome(empresa.getNome());
+
+        //confirmação dos valores
+        assertThat(valorTrue).isTrue();
+    }
+
+    @Test
+    public void verificarEmpresaFalso(){
+        //verificar
+        boolean valorFalse = empresaRepository.existsByNome("aqui tem que dar resultado False");
+
+        //confirmação dos valores
+        assertThat(valorFalse).isFalse();
     }
 }
