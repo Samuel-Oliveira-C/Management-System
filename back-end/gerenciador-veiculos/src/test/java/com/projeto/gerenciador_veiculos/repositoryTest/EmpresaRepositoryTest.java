@@ -1,4 +1,4 @@
-package com.projeto.gerenciador_veiculos;
+package com.projeto.gerenciador_veiculos.repositoryTest;
 
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @Funcionalidades Testadas:
  * @1 Salvar
  * @2 Deletar
+ * @3 Verificar
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  

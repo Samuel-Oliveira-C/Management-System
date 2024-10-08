@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface EmpresaRepository extends JpaRepository<Empresa,String>{
     @Query("SELECT COUNT(e) > 0 FROM Empresa e WHERE e.nome = :nomeEmpresa")
     boolean existsByNome(String nomeEmpresa);
+
+    @Query("SELECT e FROM Empresa e WHERE e.nome = :nomeEmpresa")
+    Empresa findByNome(String nomeEmpresa);
 }

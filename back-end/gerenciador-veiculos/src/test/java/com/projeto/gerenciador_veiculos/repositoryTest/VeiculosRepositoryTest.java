@@ -1,4 +1,4 @@
-package com.projeto.gerenciador_veiculos;
+package com.projeto.gerenciador_veiculos.repositoryTest;
 
 import org.junit.jupiter.api.Test;
 import com.projeto.gerenciador_veiculos.models.Empresa;
