@@ -1,8 +1,8 @@
 package com.projeto.gerenciador_veiculos.serviceTest;
 
+import com.projeto.gerenciador_veiculos.dto.EmpresaDTO;
 import com.projeto.gerenciador_veiculos.models.Empresa;
 import com.projeto.gerenciador_veiculos.repositories.EmpresaRepository;
-import com.projeto.gerenciador_veiculos.service.EmpresaRegisterRequest;
 import com.projeto.gerenciador_veiculos.service.EmpresaService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,10 +26,7 @@ public class EmpresaServiceTest {
 
     @Test
     public void testEmpresaRegisterSuccess() {
-        EmpresaRegisterRequest request = new EmpresaRegisterRequest();
-        request.setId("1");
-        request.setNome("Empresa Teste");
-        request.setSenha("senha123");
+        EmpresaDTO request = new EmpresaDTO("1","Empresa Teste","senha123");
 
         // Mockando o comportamento do repositório
         when(empresaRepository.existsByNome("Empresa Teste")).thenReturn(false);
@@ -51,9 +48,7 @@ public class EmpresaServiceTest {
 
     @Test
     public void testEmpresaRegisterUsernameAlreadyExists() {
-        EmpresaRegisterRequest request = new EmpresaRegisterRequest();
-        request.setNome("Empresa Teste");
-        request.setSenha("senha123");
+        EmpresaDTO request = new EmpresaDTO("1","Empresa Teste","senha123");
 
         // Mockando o comportamento do repositório para simular um nome já existente
         when(empresaRepository.existsByNome("Empresa Teste")).thenReturn(true);

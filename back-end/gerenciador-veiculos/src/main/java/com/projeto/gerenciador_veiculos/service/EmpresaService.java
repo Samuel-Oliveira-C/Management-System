@@ -3,6 +3,8 @@ package com.projeto.gerenciador_veiculos.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.projeto.gerenciador_veiculos.dto.EmpresaDTO;
 import com.projeto.gerenciador_veiculos.models.Empresa;
 import com.projeto.gerenciador_veiculos.repositories.EmpresaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,21 +18,21 @@ public class EmpresaService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Empresa empresaRegister(EmpresaRegisterRequest request){
-        if (request.getNome() == null || request.getNome().trim().isEmpty()) {
+    public Empresa empresaRegister(EmpresaDTO request){
+        if (request.nome() == null || request.nome().trim().isEmpty()) {
             throw new IllegalArgumentException("Username cannot be empty");
         }
-        if (request.getSenha() == null || request.getSenha().trim().isEmpty()) {
+        if (request.senha() == null || request.senha().trim().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be empty");
         }
-        if (empresaRepository.existsByNome(request.getNome()) != false) {
+        if (empresaRepository.existsByNome(request.nome()) != false) {
             throw new RuntimeException("Username already exists");
         }
 
         Empresa newEmpresa = new Empresa(null, null, null);
-        newEmpresa.setId(request.getId());
-        newEmpresa.setNome(request.getNome());
-        newEmpresa.setSenha(passwordEncoder.encode(request.getSenha()));
+        newEmpresa.setId(request.id());
+        newEmpresa.setNome(request.nome());
+        newEmpresa.setSenha(passwordEncoder.encode(request.senha()));
 
         return empresaRepository.save(newEmpresa);
     }
