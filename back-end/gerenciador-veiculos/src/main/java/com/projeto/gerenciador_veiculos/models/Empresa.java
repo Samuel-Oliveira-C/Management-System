@@ -22,7 +22,7 @@ public class Empresa {
     private String senha;
 
     // Construtor padrão (necessário para JPA)
-    protected Empresa() {}
+    public Empresa() {}
 
     // Construtor
     public Empresa(String id, String nome, String senha) {
